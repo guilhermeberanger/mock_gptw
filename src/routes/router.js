@@ -42,32 +42,25 @@ router.post('/obras', async (req, res) => {
 })
 
 router.delete('/obras/:filmesiD', async (req, res) => {
-        const { filmesiD } = req.params;
-        db.collection('tolkien').doc(filmesiD).delete()
-        .then(()=> (
+    const { filmesiD } = req.params;
+    db.collection('tolkien').doc(filmesiD).delete()
+        .then(() => (
             res.status(204).send("Document successfully deleted!")
-          ))
-          .catch((error) => {
+        ))
+        .catch((error) => {
             res.status(500).send(error);
-          });
+        });
 })
 
 router.put('/obras/:filmesiD', async (req, res) => {
     const { filmesiD } = req.params
-    await db.collection('tolkien')
-        .doc(filmesiD)
-        .set(
-            req.body,
-            { merge: true }
-        )
-        .then(()=> (
-            res.json({
-              id:filmesiD
-            })
-          ))
-          .catch((error)=> (
+    await db.collection('tolkien').doc(filmesiD).set(req.body, { merge: true })
+        .then(() => (
+            res.json({ id: filmesiD })
+        ))
+        .catch((error) => (
             res.status(500).send(error)
-          ))
+        ))
 })
 
 module.exports = router
