@@ -4,7 +4,6 @@ const router = express.Router()
 
 //Internal Imports
 const db = require('../database/database')
-const midd = require('../midd/authorization')
 
 //Routes
 router.get('/', async (req, res) => {
